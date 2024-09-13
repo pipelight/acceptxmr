@@ -608,7 +608,7 @@ impl<S: Storage + 'static> PaymentGatewayBuilder<S> {
             self.daemon_url
                 .parse::<Uri>()
                 .map_err(|e| AcceptXmrError::Parse {
-                    datatype: "Uri",
+                    datatype: "Uri".to_owned(),
                     input: self.daemon_url.clone(),
                     error: e.to_string(),
                 })?,
@@ -645,14 +645,14 @@ impl<S: Storage + 'static> PaymentGatewayBuilder<S> {
         let viewpair = monero::ViewPair {
             view: monero::PrivateKey::from_str(&self.private_view_key).map_err(|e| {
                 AcceptXmrError::Parse {
-                    datatype: "PrivateKey",
+                    datatype: "PrivateKey".to_owned(),
                     input: "[REDACTED]".to_string(),
                     error: e.to_string(),
                 }
             })?,
             spend: monero::Address::from_str(&self.primary_address)
                 .map_err(|e| AcceptXmrError::Parse {
-                    datatype: "Address",
+                    datatype: "Address".to_owned(),
                     input: self.primary_address.to_string(),
                     error: e.to_string(),
                 })?

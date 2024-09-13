@@ -162,7 +162,7 @@ pub enum AcceptXmrError {
     #[error("failed to parse {datatype} from \"{input}\": {error}")]
     Parse {
         /// Type to parse.
-        datatype: &'static str,
+        datatype: String,
         /// Input to parse.
         input: String,
         /// Error encountered.
