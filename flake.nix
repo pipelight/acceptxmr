@@ -1,4 +1,5 @@
 {
+  description = "Acceptxmr - A monero payment gateway server";
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     rust-overlay.url = "github:oxalica/rust-overlay";
@@ -15,6 +16,12 @@
     flake-parts.lib.mkFlake {
       inherit inputs;
     } {
+      flake = {
+        nixosModules = rec {
+          default = acceptxmr;
+          acceptxmr = ./modules/default.nix;
+        };
+      };
       systems =
         flake-utils.lib.allSystems;
       perSystem = {
