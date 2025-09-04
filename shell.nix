@@ -4,15 +4,10 @@ pkgs.mkShell {
     openssl
     pkg-config
 
-    clang
-    llvmPackages.libclang
-
-    gcc
-    # rustup
-    pkg-config
+    # Lsp
     # rust-analyzer
-    openssl.dev
     # typos-lsp
+    # alejandra
 
     (rust-bin.fromRustupToolchainFile ./rust-toolchain.toml)
   ];
@@ -21,6 +16,4 @@ pkgs.mkShell {
     alias clippy="cargo +nightly clippy --all-targets --all-features"
     alias test="cargo +nightly test --all-targets --all-features"
   '';
-
-  LIBCLANG_PATH = "${pkgs.llvmPackages.libclang.lib}/lib";
 }

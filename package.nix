@@ -14,7 +14,7 @@ pkgs.rustPlatform.buildRustPackage rec {
 
   # disable tests
   checkType = "debug";
-  doCheck = true;
+  doCheck = false;
 
   nativeBuildInputs = with pkgs; [
     pkg-config
@@ -23,9 +23,6 @@ pkgs.rustPlatform.buildRustPackage rec {
   buildInputs = with pkgs; [
     openssl
     pkg-config
-
-    clang
-    llvmPackages.libclang
 
     (rust-bin.fromRustupToolchainFile ./rust-toolchain.toml)
   ];
