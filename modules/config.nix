@@ -51,7 +51,7 @@ in
           verbosity
         ];
 
-        ExecStart = " ${package}/bin/${moduleName}";
+        ExecStart = " ${package}/bin/${moduleName}-server";
 
         WorkingDirectory = "/var/lib/${moduleName}";
         StandardInput = "null";
