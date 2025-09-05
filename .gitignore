@@ -3,6 +3,7 @@
 
 # Nixos
 .direnv/
+result/
 
 #
 AcceptXMR_DB

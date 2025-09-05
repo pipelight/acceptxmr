@@ -95,22 +95,46 @@ paths and ports filled out.
 
 ### Run with Nixos (as a systemd service).
 
+Add the repo url to your flake inputs.
+
 ```nix
 # flake.nix
+  inputs = {
+    acceptxmr = {
+      url = "github:busyboredom/acceptxmr";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+  };
 
 ```
 
+Add the module to your configuration.
+
+```nix
+nixosConfiguration = {
+    default = pkgs.lib.nixosSystem {
+        modules = [
+            inputs.acceptxmr.nixosModules.default
+        ];
+    };
+}
+```
+
+Enable the service.
+
 ```nix
 # default.nix
-environment.etc = {
-   "acceptxmr/acceptxmr.yaml".text = builtins.readFile ./dotfiles/acceptxmr/acceptxmr.yaml;
- };
-
 services.acceptxmr = {
     enable = true;
     logLevel = "debug";
     user = "anon";
 };
+
+## Optional: link to your config file.
+environment.etc = {
+   "acceptxmr/acceptxmr.yaml".text = builtins.readFile ./dotfiles/acceptxmr/acceptxmr.yaml;
+ };
+
 ```
 
 ### Configuration

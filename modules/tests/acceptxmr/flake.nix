@@ -25,7 +25,7 @@
           ../commons/configuration.nix
           ../commons/hardware-configuration.nix
 
-          inputs.accexptxmr.nixosModules.default
+          inputs.acceptxmr.nixosModules.default
 
           ###################################
           # You may move this module into its own file.
