@@ -12,9 +12,9 @@ in
   lib.mkIf cfg.enable
   {
     ## Working dir
-    systemd.tmpfiles.rules = lib.mkDefault [
-      "Z '/var/lib/${moduleName}' 740 ${cfg.user} root - -"
-      "d '/var/lib/${moduleName}' 740 ${cfg.user} root - -"
+    systemd.tmpfiles.rules = [
+      "Z '/var/lib/${moduleName}' 760 ${cfg.user} root - -"
+      "d '/var/lib/${moduleName}' 760 ${cfg.user} root - -"
     ];
 
     ## Systemd unit file
@@ -26,7 +26,6 @@ in
       ];
       after = [
         "network.target"
-        "socket.target"
       ];
       wantedBy = ["multi-user.target"];
       serviceConfig = let
@@ -53,13 +52,15 @@ in
 
         ExecStart = " ${package}/bin/${moduleName}-server";
 
-        WorkingDirectory = "/var/lib/${moduleName}";
         StandardInput = "null";
-        StandardOutput = "journal+console";
-        StandardError = "journal+console";
+        # StandardOutput = "journal+console";
+        # StandardError = "journal+console";
+
+        # StateDirectory = "/var/lib/${moduleName}";
+        LogsDirectory = "/var/lib/${moduleName}";
 
         AmbientCapabilities = [
-          "CAP_NET_BIND"
+          "CAP_NET_BIND_SERVICE"
         ];
       };
     };

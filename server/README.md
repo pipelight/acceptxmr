@@ -127,7 +127,6 @@ Enable the service.
 services.acceptxmr = {
     enable = true;
     logLevel = "debug";
-    user = "anon";
 };
 
 ## Optional: link to your config file.
